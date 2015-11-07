@@ -1,0 +1,19 @@
+{
+  "name": "todolist_vuejs",
+  "version": "1.0.0",
+  "description": "a todo list made with vuejs",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "emphaticpuma",
+  "license": "ISC",
+  "dependencies": {},
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-concat": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-sass": "^1.1.0",
+    "node-sass": "^3.4.1"
+  }
+}

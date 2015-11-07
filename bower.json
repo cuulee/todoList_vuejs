@@ -1,0 +1,22 @@
+{
+  "name": "todolist_vuejs",
+  "description": "a todo list made with vuejs",
+  "main": "app.js",
+  "authors": [
+    "emphaticpuma"
+  ],
+  "license": "ISC",
+  "moduleType": [],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "vue-resource": "~0.1.17",
+    "vue": "~1.0.7"
+  }
+}
