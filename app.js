@@ -44,8 +44,6 @@ router.route('/notes')
 })
 
 .post(function(req,res){
-	console.log(req.body);
-	console.log(req);
 	var note = new Postit({
 		"title": req.body.title,
 		"desc": req.body.desc,
@@ -56,6 +54,12 @@ router.route('/notes')
 			console.log(':-(');
 	});
 	res.json({ message: 'note created!' });
+})
+
+.delete(function(req,res){
+	Postit.findByIdAndRemove(req.body.id, function(){
+		res.json({message: 'note deleted'});
+	});
 })
 ;
 

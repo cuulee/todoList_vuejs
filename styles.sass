@@ -159,6 +159,13 @@ input[type=date],input[type=text],textarea
 	padding: 0
 	margin-bottom: 1em
 	padding: 0.25em 0.5em
+	&:required
+		outline: 0
+		box-shadow: none
+		&::-webkit-input-placeholder::after
+			content: " *"
+			color: $accent
+
 	&::-webkit-input-placeholder
 		color: $divider
 	&::-moz-placeholder

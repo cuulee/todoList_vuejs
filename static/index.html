@@ -36,11 +36,10 @@
 	<main class="main">
 		<section class="post-it__list">
 			<ul>
-				<li v-for="postit in postits">
+				<li v-for="postit in postits" data-db-id="{{postit._id}}">
 					<h3>{{ postit.title }}</h3>
 					<p>{{ postit.desc }}</p>
 					<p>{{ postit.date }}</p>
-					<p>{{postit._id}}</p>
 					<button class="danger" v-on:click="deleteNote($index)">
 						<i class="material-icons">clear</i>
 						delete
@@ -53,7 +52,7 @@
 		</section>
 		<section class="post-it__add">
 			<h2>Add a post-it</h2>
-			<input class="block" type="text" placeholder="title" v-model="postit.title">
+			<input class="block" type="text" placeholder="title" v-model="postit.title" required>
 			<textarea placeholder="desc" v-model="postit.desc"></textarea>
 			<div class="group inline">
 				<input type="text" placeholder="date" v-model="postit.date" class="inline">

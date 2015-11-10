@@ -13,14 +13,13 @@ var list = new Vue({
 	},
 	methods: {
 		deleteNote: function($index) {
-			if(confirm("Are you sure?"))
-				this.postits.splice($index,1);
-				console.log(this.postit._id);
-				console.log(this.postit);
-				// this.$http.delete('api/notes',this.postit.id);
-
-			// back end delete goes here!
-			
+			if(confirm("Are you sure?")) {
+				console.log(this.postits[$index]._id);
+				this.$http.delete('/api/notes',{id: this.postits[$index]._id})
+					.success(function(){
+						this.postits.splice($index,1);
+					});
+				}
 		},
 		getPostIts: function() {
 			// back end import stuff goes here
@@ -37,8 +36,8 @@ var list = new Vue({
 			};
 			this.$http.post('/api/notes',cur_postit)
 			.success(function(){
-				this.postits.push(cur_postit);
 				this.getPostIts();
+				this.postits.push(cur_postit);
 			}
 			);
 		}
