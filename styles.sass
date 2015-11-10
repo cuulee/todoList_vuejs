@@ -1,3 +1,171 @@
+@import 'bower.scss'
+
+$d-primary: #388E3C
+$primary: #4CAF50
+$l-primary: #C8E6C9
+$accent: #7C4DFF
+$t-primary: #212121
+$t-secondary: #727272
+$divider: #B6B6B6
+
 body
+	font-family: 'Roboto', sans-serif
+	display: flex
+	min-height: 100vh
+	font-size: 18px
+	@media (max-width: 550px)
+		flex-direction: column
+
+*,*::before,*::after
+	box-sizing: border-box
+
+// buttons -- will be implemented in personal css framework soon^TM
+
+button
+	// reset
+	padding: 0
 	margin: 0
-	font-family: 'Open Sans',sans-serif
+	background-color: transparent
+	border: 0
+
+	// styles
+	display: inline-flex
+	align-items: center
+	padding: 0.5rem 0.75rem
+	margin-right: 0.75rem
+	background: linear-gradient(#eee, #ddd)
+	font-weight: 400
+	font-size: 12px
+	border-radius: 4px
+	text-transform: uppercase
+	i.material-icons
+		padding-right: 0.25em
+		font-size: 20px
+	&.primary
+		background: linear-gradient(#0294ea,#0277BD)
+		color: #fff
+	&.danger
+		background: linear-gradient(#f66c62,#F44336)
+		color: #fff
+	&.block
+		display: flex
+	&.inline
+		display: inline-flex
+
+// inline button/input
+.group.inline
+	display: flex
+	margin-bottom: 1em
+	input.inline
+		border-right: 0
+		border-top-right-radius: 0
+		border-bottom-right-radius: 0
+		margin-bottom: 0
+	button.inline
+		border-top-left-radius: 0
+		border-bottom-left-radius: 0
+		border: 1px solid $divider
+
+.nav
+	background-color: #4CAF50
+	color: #fff
+	padding: 0 3em 0 2em
+	min-width: 300px
+	border-right: 1px solid #999
+	@media (max-width: 550px)
+		padding: 0 2em 1em
+		em::after
+			margin-bottom: 1em
+	em
+		margin-bottom: 0.75em
+		display: block
+		color: $l-primary
+		&::after
+			content: ''
+			display: block
+			height: 1px
+			width: 100%
+			margin-top: 1.25em
+			background-color: $l-primary
+	h1
+		margin-bottom: 0.25em
+	a
+		text-decoration: none
+		color: inherit
+
+	div
+		display: flex
+		padding: 0.5em
+		margin-left: -0.5em
+		font-size: 16px
+		align-items: center
+		transition: all 100ms ease
+		&:hover
+			background-color: $d-primary
+		i
+			padding-right: 0.25em
+
+.main
+	width: 100%
+	background-color: #f9f9f9
+	display: flex
+	flex-direction: column
+
+.post-it__list
+	order: 1
+	ul
+		display: flex
+		flex-direction: row
+		flex-wrap: wrap-reverse
+		padding: 0
+		margin: 0
+		list-style-type: none
+		li
+			margin: 2rem
+			padding: 2rem
+			box-shadow: 0px 2px 7px rgba(0,0,0,0.4)
+			background-color: #fff
+
+			h3
+				margin: 0
+			p
+				margin: 0
+
+.post-it__add
+	order: 0
+	margin: 2rem
+	padding: 2rem
+	background-color: #FFF
+	box-shadow: 0px 2px 7px rgba(0,0,0,0.4)
+	h2:first-of-type
+		margin: 0
+		margin-bottom: 1rem
+
+
+// forms -- will be implemented in personal css framework
+
+input.block
+	display: block
+	
+textarea
+	resize: none
+	height: 4em
+	display: inline-block
+	
+input[type=date],input[type=text],textarea
+	border: none
+	border: 1px solid $divider
+	border-radius: 4px
+	padding: 0
+	margin-bottom: 1em
+	padding: 0.25em 0.5em
+	&::-webkit-input-placeholder
+		color: $divider
+	&::-moz-placeholder
+		color: $divider
+	&:-ms-input-placeholder
+		color: $divider
+
+	&:focus,&:active
+		outline: 0
+		border-color: $accent

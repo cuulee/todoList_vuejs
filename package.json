@@ -8,7 +8,10 @@
   },
   "author": "emphaticpuma",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3"
+  },
   "devDependencies": {
     "grunt": "^0.4.5",
     "grunt-bower-concat": "^0.6.0",

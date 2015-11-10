@@ -4,11 +4,70 @@
 <head>
 	<meta charset="UTF-8">
 	<title>ToDo List - Vuejs</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700' rel='stylesheet' type='text/css'>
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-	<h1>Todo List</h1>	
+
+	<nav class="nav">
+		<h1>Todo List</h1>
+		<em>Keep track of everything using vue.js</em>
+		<a href="#">
+		<div>
+			<i class="material-icons">person</i>login
+		</div>
+		</a>
+		<a href="#" v-on:click="streamView()">
+		<div>
+			<i class="material-icons">view_stream</i>stream view
+		</div>
+		</a>
+		<a href="#" v-on:click="gridView()">
+		<div>
+			<i class="material-icons">view_module</i>grid view
+		</div>
+		</a>
+	</nav>
+
+	<main class="main">
+		<section class="post-it__list">
+			<ul>
+				<li v-for="postit in postits">
+					<h3>{{ postit.title }}</h3>
+					<p>{{ postit.desc }}</p>
+					<p>{{ postit.date }}</p>
+					<p>{{postit._id}}</p>
+					<button class="danger" v-on:click="deleteNote($index)">
+						<i class="material-icons">clear</i>
+						delete
+					</button><button class="primary">
+						<i class="material-icons">edit</i>
+						edit
+					</button>
+				</li>
+			</ul>
+		</section>
+		<section class="post-it__add">
+			<h2>Add a post-it</h2>
+			<input class="block" type="text" placeholder="title" v-model="postit.title">
+			<textarea placeholder="desc" v-model="postit.desc"></textarea>
+			<div class="group inline">
+				<input type="text" placeholder="date" v-model="postit.date" class="inline">
+				<button class="inline">today</button>
+			</div>
+			<button class="primary block" v-on:click="newNote()">
+				<i class="material-icons">add</i>
+				add
+			</button>
+		</section>
+	</main>
+
+	<script src="bower.js"></script>
+	<script src="fe_app.js"></script>
 </body>
 
 </html>

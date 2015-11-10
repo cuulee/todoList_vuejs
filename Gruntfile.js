@@ -11,13 +11,24 @@ module.exports = function(grunt) {
 				}
 			}
 		},
+		bower_concat: {
+		all: {
+			dest: 'static/bower.js',
+			cssDest: 'bower.scss',
+			bowerOptions: {
+	  				relative: false
+			}
+  		}
+		},
 		watch: {
 			options: { 
 				livereload: true 
 			},
 			src: {
 				files: [
-					'styles.sass'
+					'styles.sass',
+					'static/index.html',
+					'static/fe_app.js'
 				],
 				tasks: ['sass'],
 			},
@@ -35,9 +46,10 @@ module.exports = function(grunt) {
 
 	
 	grunt.loadNpmTasks('grunt-sass');
+	grunt.loadNpmTasks('grunt-bower-concat');
 	grunt.loadNpmTasks('grunt-contrib-watch');
 
 	// Default task(s).
-	grunt.registerTask('default', ['sass','watch']);
+	grunt.registerTask('default', ['bower_concat','sass','watch']);
 
 };
