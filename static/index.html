@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>ToDo List - Vuejs</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300,400italic,700|Roboto+slab' rel='stylesheet' type='text/css'>
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 	<link rel="stylesheet" href="styles.css">
@@ -13,9 +13,12 @@
 
 <body>
 
-	<nav class="nav">
+<nav class="nav">
+	<div>
 		<h1>Todo List</h1>
 		<em>Keep track of everything using vue.js</em>
+	</div>
+	<div>
 		<a href="#">
 		<div>
 			<i class="material-icons">person</i>login
@@ -31,22 +34,35 @@
 			<i class="material-icons">view_module</i>grid view
 		</div>
 		</a>
-	</nav>
+	</div>
+</nav>
 
 	<main class="main">
 		<section class="post-it__list">
+			<h3 class="subheader">Notes</h3>
 			<ul>
-				<li v-for="postit in postits" data-db-id="{{postit._id}}">
-					<h3>{{ postit.title }}</h3>
-					<p>{{ postit.desc }}</p>
-					<p>{{ postit.date }}</p>
-					<button class="danger" v-on:click="deleteNote($index)">
-						<i class="material-icons">clear</i>
-						delete
-					</button><button class="primary">
-						<i class="material-icons">edit</i>
-						edit
-					</button>
+				<li v-for="postit in postits | orderBy 'date' -1" data-db-id="{{postit._id}}" v-on:mouseenter="showDelete($event)" v-on:mouseleave="hideDelete($event)">
+					<section class="postit__icon" v-on:click="checkDel($event,$index)">
+						<i class="material-icons">info</i>
+					</section>
+					<section class="postit__content">
+						<header class="post-it__header">
+							<h3>{{ postit.title }}</h3>
+							<div class="date">
+								<!-- <i class="material-icons">event</i> -->
+								{{ postit.date }}
+							</div>						
+						</header>
+						<div class="post-it__desc">	
+							<p class="visible">{{ postit.desc}}</p>  <!-- | truncate_words '70' -->
+							<p class="hidden">{{ postit.desc}}</p>
+							<!-- <button class="symmetrical" v-on:click="showDesc($event)">
+								<div>
+								<i class="material-icons no-padding">expand_more</i>
+								</div>
+							</button> -->
+						</div>
+					</section>
 				</li>
 			</ul>
 		</section>
@@ -54,13 +70,18 @@
 			<h2>Add a post-it</h2>
 			<input class="block" type="text" placeholder="title" v-model="postit.title" required>
 			<textarea placeholder="desc" v-model="postit.desc"></textarea>
+			<input type="text" class="block" placeholder="icon" v-model="postit.icon">
 			<div class="group inline">
-				<input type="text" placeholder="date" v-model="postit.date" class="inline">
-				<button class="inline">today</button>
+				<input type="text" placeholder="date 00/00/00" v-model="postit.date" class="inline">
+				<button class="inline">
+					today
+				</button>
 			</div>
-			<button class="primary block" v-on:click="newNote()">
-				<i class="material-icons">add</i>
-				add
+			<button class="primary" v-on:click="newNote()">
+				<div>
+					<i class="material-icons">create</i>
+					add
+				</div>
 			</button>
 		</section>
 	</main>

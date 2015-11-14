@@ -11,13 +11,23 @@ $divider: #B6B6B6
 body
 	font-family: 'Roboto', sans-serif
 	display: flex
+	flex-direction: column
 	min-height: 100vh
-	font-size: 18px
-	@media (max-width: 550px)
-		flex-direction: column
+	font-size: 16px
+	background-color: #f9f9f9
+	color: $t-primary
 
 *,*::before,*::after
 	box-sizing: border-box
+
+// material component styles
+
+// subheader
+.subheader
+	color: $t-secondary
+	font-size: 1em
+	font-weight: 400
+	margin: 0
 
 // buttons -- will be implemented in personal css framework soon^TM
 
@@ -29,28 +39,52 @@ button
 	border: 0
 
 	// styles
-	display: inline-flex
-	align-items: center
-	padding: 0.5rem 0.75rem
+	& > div
+		display: inline-flex
+		align-items: center
+		flex-direction: row
+		padding: 0.5rem 1rem 0.5rem 0.75rem
+		height: 2.25rem
+
+	// ff doesn't do this properly
+	// ff refuses to address the bug even though all other browsers support it :-(
+	// the text isn't perfectly aligned, but it's passable.
+	// https://bugzilla.mozilla.org/show_bug.cgi?id=984869
+	// plz fix volvo
+
 	margin-right: 0.75rem
 	background: linear-gradient(#eee, #ddd)
 	font-weight: 400
 	font-size: 12px
 	border-radius: 4px
 	text-transform: uppercase
+	letter-spacing: 0.1ex
 	i.material-icons
-		padding-right: 0.25em
+		padding-right: 0.25rem
 		font-size: 20px
+		display: inline-block
 	&.primary
 		background: linear-gradient(#0294ea,#0277BD)
 		color: #fff
 	&.danger
 		background: linear-gradient(#f66c62,#F44336)
 		color: #fff
-	&.block
+	&.small
+		font-size: 10px
+		margin: 0
+		& > div
+			height: auto
+	&.block div
 		display: flex
-	&.inline
+	&.inline div
 		display: inline-flex
+	&.symmetrical > div
+		padding: 0.5rem 0.75rem
+	&.no_bg
+		background: transparent
+	&.right
+		margin-right: 0
+		margin-left: auto
 
 // inline button/input
 .group.inline
@@ -61,45 +95,51 @@ button
 		border-top-right-radius: 0
 		border-bottom-right-radius: 0
 		margin-bottom: 0
+		flex-shrink: 1
 	button.inline
 		border-top-left-radius: 0
 		border-bottom-left-radius: 0
 		border: 1px solid $divider
+		display: inline-flex
+		align-items: center
+		flex-direction: row
+		padding: 0.5rem 1rem 0.5rem 0.75rem
+		height: 2.25rem
+		margin-right: 0
+		flex-shrink: 0
 
 .nav
 	background-color: #4CAF50
 	color: #fff
-	padding: 0 3em 0 2em
-	min-width: 300px
-	border-right: 1px solid #999
+	display: flex
+	justify-content: space-between
+	padding: 1em 2em
 	@media (max-width: 550px)
 		padding: 0 2em 1em
+		flex-direction: column
 		em::after
 			margin-bottom: 1em
 	em
-		margin-bottom: 0.75em
-		display: block
 		color: $l-primary
-		&::after
-			content: ''
-			display: block
-			height: 1px
-			width: 100%
-			margin-top: 1.25em
-			background-color: $l-primary
 	h1
-		margin-bottom: 0.25em
+		margin: 0
 	a
 		text-decoration: none
 		color: inherit
+		align-self: center
+		&:last-of-type
+			margin-right: 2em
 
-	div
+	& > div:nth-of-type(2)
+		display: flex
+
+	a div
 		display: flex
 		padding: 0.5em
-		margin-left: -0.5em
 		font-size: 16px
 		align-items: center
 		transition: all 100ms ease
+
 		&:hover
 			background-color: $d-primary
 		i
@@ -107,42 +147,115 @@ button
 
 .main
 	width: 100%
-	background-color: #f9f9f9
+	
 	display: flex
-	flex-direction: column
+	flex-direction: row
+	@media(max-width:550px)
+		flex-direction: column
+
+.postit__icon
+
 
 .post-it__list
 	order: 1
+	margin: 2rem
+	max-width: 1000px
+	flex-grow: 1
+	& > h3
+		font-size: 14px
+		font-weight: 400
+		margin-left: 1rem
+		height: 48px
+		line-height: 48px
 	ul
 		display: flex
-		flex-direction: row
-		flex-wrap: wrap-reverse
+		flex-direction: column
+		flex-wrap: wrap
 		padding: 0
 		margin: 0
 		list-style-type: none
+		box-shadow: 0px 2px 7px rgba(0,0,0,0.4)
 		li
-			margin: 2rem
-			padding: 2rem
-			box-shadow: 0px 2px 7px rgba(0,0,0,0.4)
+			flex-grow: 1
+			display: flex
+			// align-items: center
 			background-color: #fff
-
-			h3
-				margin: 0
+			border-bottom: 1px solid $divider
+			padding: 1rem 1rem 1.3rem
+			min-height: 96px
+			.postit__icon
+				display: flex
+				align-items: center
+				padding-right: 1rem
+				i.material-icons
+					font-size: 40px
+					color: $t-secondary
+			.postit__content
+				width: 100%
+				.post-it__header
+					display: flex
+					justify-content: space-between
+					align-items: flex-start
+					h3
+						margin: 0
+						font-size: 16px
+						margin-bottom: 2px
+				.post-it__desc
+					display: flex
+					align-items: flex-start
+					justify-content: space-between
+					color: $t-secondary
+					p
+						margin: 0
+						max-width: 80%
+					
 			p
 				margin: 0
+				font-size: 14px
+				font-family: 'roboto slab',sans-serif
+				margin-bottom: 1rem
+			div.date
+				margin: 0
+				font-size: 13px
+				color: $t-secondary
+				display: flex
+				align-items: center
+				i
+					padding-right: 0.5rem
+
 
 .post-it__add
+	min-width: 400px
 	order: 0
 	margin: 2rem
 	padding: 2rem
 	background-color: #FFF
 	box-shadow: 0px 2px 7px rgba(0,0,0,0.4)
+	width: auto
+	align-self: flex-start
+	@media(max-width:550px)
+		min-width: 0
+
+	input,textarea
+		max-width: 400px
+		width: 100%
 	h2:first-of-type
 		margin: 0
 		margin-bottom: 1rem
 
 
+// utility clauses
+
+.hidden
+	display: none
+
+.no-padding
+	padding: 0 !important
+
 // forms -- will be implemented in personal css framework
+
+input[type=text]
+	height: 2.25rem
 
 input.block
 	display: block
@@ -162,9 +275,6 @@ input[type=date],input[type=text],textarea
 	&:required
 		outline: 0
 		box-shadow: none
-		&::-webkit-input-placeholder::after
-			content: " *"
-			color: $accent
 
 	&::-webkit-input-placeholder
 		color: $divider

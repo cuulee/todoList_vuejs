@@ -38,7 +38,7 @@ router.route('/notes')
 	Postit.find(function(err,postits){
 		if (err)
 			console.log(err);
-		console.log(postits);
+		// console.log(postits);
 		res.json({"postits": postits});
 	});
 })
@@ -60,6 +60,12 @@ router.route('/notes')
 	Postit.findByIdAndRemove(req.body.id, function(){
 		res.json({message: 'note deleted'});
 	});
+})
+;
+
+router.route('/kill')
+.delete(function(req,res){
+
 })
 ;
 
